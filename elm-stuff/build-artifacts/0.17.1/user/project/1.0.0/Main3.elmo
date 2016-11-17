@@ -1,0 +1,124 @@
+var _user$project$Main3$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		if (_p0.ctor === 'MouseMsg') {
+			var _p1 = _p0._0;
+			return {
+				ctor: '_Tuple2',
+				_0: {
+					x: _p1.x,
+					y: A2(_elm_lang$core$Debug$log, 'y', _p1.y)
+				},
+				_1: _elm_lang$core$Platform_Cmd$none
+			};
+		} else {
+			return {
+				ctor: '_Tuple2',
+				_0: {x: model.x + 2, y: model.y + 3},
+				_1: _elm_lang$core$Platform_Cmd$none
+			};
+		}
+	});
+var _user$project$Main3$renderRows = function (mylst) {
+	return A2(
+		_elm_lang$core$List$map,
+		function (_p2) {
+			var _p3 = _p2;
+			return A2(
+				_elm_lang$html$Html$td,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$id(_p3._0)
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(_p3._1)
+					]));
+		},
+		mylst);
+};
+var _user$project$Main3$renderList = function (lst) {
+	return A2(
+		_elm_lang$html$Html$tr,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_user$project$Main3$renderRows(lst));
+};
+var _user$project$Main3$zzz = function (_p4) {
+	var _p5 = _p4;
+	return _elm_lang$html$Html$text('zzz');
+}(
+	{ctor: '_Tuple2', _0: 4, _1: 5});
+var _user$project$Main3$xxx = function (lst) {
+	return A2(
+		_elm_lang$core$List$map,
+		function (_p6) {
+			var _p7 = _p6;
+			return A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$id(_p7._0)
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(_p7._1)
+					]));
+		},
+		lst);
+};
+var _user$project$Main3$init = {
+	ctor: '_Tuple2',
+	_0: {x: 0, y: 0},
+	_1: _elm_lang$core$Platform_Cmd$none
+};
+var _user$project$Main3$sList = _elm_lang$core$Native_List.fromArray(
+	['first', 'second', 'third']);
+var _user$project$Main3$sudokuPuzzle = _elm_lang$core$Native_List.fromArray(
+	[
+		{ctor: '_Tuple2', _0: 'id1', _1: 'text 1'},
+		{ctor: '_Tuple2', _0: 'id2', _1: 'text 2'}
+	]);
+var _user$project$Main3$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html$text(
+				_elm_lang$core$String$concat(
+					_elm_lang$core$Native_List.fromArray(
+						[
+							'x=',
+							_elm_lang$core$Basics$toString(model.x),
+							' ',
+							'y=',
+							_elm_lang$core$Basics$toString(model.y)
+						]))),
+				_user$project$Main3$renderList(_user$project$Main3$sudokuPuzzle),
+				_user$project$Main3$zzz
+			]));
+};
+var _user$project$Main3$Model = F2(
+	function (a, b) {
+		return {x: a, y: b};
+	});
+var _user$project$Main3$KeyMsg = function (a) {
+	return {ctor: 'KeyMsg', _0: a};
+};
+var _user$project$Main3$MouseMsg = function (a) {
+	return {ctor: 'MouseMsg', _0: a};
+};
+var _user$project$Main3$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$batch(
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$mouse$Mouse$clicks(_user$project$Main3$MouseMsg),
+				_elm_lang$keyboard$Keyboard$downs(_user$project$Main3$KeyMsg)
+			]));
+};
+var _user$project$Main3$main = {
+	main: _elm_lang$html$Html_App$program(
+		{init: _user$project$Main3$init, view: _user$project$Main3$view, update: _user$project$Main3$update, subscriptions: _user$project$Main3$subscriptions})
+};
