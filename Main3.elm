@@ -21,7 +21,7 @@ type alias Model =
 
 sudokuPuzzle : List ( String, String )
 sudokuPuzzle =
-    [ ( "id1", "text 1" ), ( "id2", "text 2" ) ]
+    [ ( "1", "text 1" ), ( "2", "text 2" ), ( "3", "text 3" ), ( "4", "text 4" ), ( "5", "text 5" ), ( "6", "text 6" ) ]
 
 
 sList : List String
@@ -50,36 +50,43 @@ type Msg
 view : Model -> Html Msg
 view model =
     div []
-        [ text
-            (concat
-                [ "x="
-                , toString model.x
-                , " "
-                , "y="
-                , toString model.y
-                ]
-            )
+        [ text (concat [ "x=", (toString model.x), " ", "y=", (toString model.y) ])
         , renderList sudokuPuzzle
-        , div [] <| xxx sudokuPuzzle
+          -- ,xxx
         ]
 
 
-xxx : List ( String, String ) -> List (Html Msg)
 xxx lst =
     List.map (\( i, t ) -> div [ id i ] [ text t ]) lst
 
 
+toint : String -> Int
+toint str =
+    case String.toInt str of
+        Ok value ->
+            value
+
+        _ ->
+            1
+
+
 renderList : List ( String, String ) -> Html Msg
 renderList lst =
-    tr [] (renderRows lst)
+    tr []
+        (List.map
+            (\( i, t ) ->
+                if rem (toint i) 3 == 0 then
+                    td [ id i ] [ text t ]
+                else
+                    td [ id "z" ] [ text t ]
+            )
+            lst
+        )
 
 
-renderRows : List ( String, String ) -> List (Html Msg)
-renderRows mylst =
-    List.map (\( i, t ) -> td [ id i ] [ text t ]) mylst
 
-
-
+--renderTable lst =
+--    List.map(\(i,t) -> )
 -- UPDATE
 
 
@@ -87,9 +94,7 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         MouseMsg position ->
-            ( { x = position.x, y = (Debug.log "y" position.y) }
-            , Cmd.none
-            )
+            ( { x = position.x, y = (Debug.log "y" position.y) }, Cmd.none )
 
         KeyMsg code ->
             ( { x = model.x + 2, y = model.y + 3 }, Cmd.none )
